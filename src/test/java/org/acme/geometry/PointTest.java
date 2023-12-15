@@ -67,5 +67,12 @@ public class PointTest {
 		//////// Envelope Facade
 		Assert.assertEquals("3.0,9.2,3.0,9.2", p2.getEnvelope().toString());
 		Assert.assertEquals("3.0,9.2,6.0,13.2", ls.getEnvelope().toString());
+		//////// WktWriter
+		WktWriter writer = new WktWriter();
+		Assert.assertEquals(writer.write(p2), "POINT(3.0 9.2)");
+		Assert.assertEquals(writer.write(p), "POINT EMPTY");
+		Assert.assertEquals(writer.write(ls3), "LINESTRING EMPTY");
+		Assert.assertEquals(writer.write(ls), "LINESTRING(3.0 9.2,6.0 13.2)");
+
 	}
 }

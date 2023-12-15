@@ -48,14 +48,15 @@ public class LineString implements Geometry {
 
 	public Geometry clone() {
 		List<Point> list = new ArrayList<Point>();
-		for(Point p : points) {
+		for (Point p : points) {
 			list.add((Point) p.clone());
 		}
 		return new LineString(list);
 	}
+
 	public Envelope getEnvelope() {
 		EnvelopeBuilder builder = new EnvelopeBuilder();
-		for(Point p:this.points) {
+		for (Point p : this.points) {
 			builder.insert(p.getCoordinate());
 		}
 		return builder.build();
