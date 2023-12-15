@@ -1,5 +1,9 @@
 package org.acme.geometry;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +16,7 @@ public class PointTest {
 
 	@Test
 	///////// Point
-	public void testConstructorPoint() {
+	public void testConstructorPoint() throws UnsupportedEncodingException {
 		Point p = new Point();
 		Assert.assertEquals("[NaN,NaN]", p.getCoordinate().toString());
 		Coordinate c = new Coordinate(3.0, 4.0);
@@ -73,6 +77,34 @@ public class PointTest {
 		Assert.assertEquals(writer.write(p), "POINT EMPTY");
 		Assert.assertEquals(writer.write(ls3), "LINESTRING EMPTY");
 		Assert.assertEquals(writer.write(ls), "LINESTRING(3.0 9.2,6.0 13.2)");
-
+		//////// GeometryVisitor
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(os);
+		LogGeometryVisitor visitor = new LogGeometryVisitor(out);
+		Geometry geometry = SampleGeometryFactory.createPointA();
+		geometry.accept(visitor);
+		String results = os.toString("UTF8");
+		Assert.assertEquals(results, "Je suis un point avec x=3.0 et y=4.0.");
+		os = new ByteArrayOutputStream();
+		out = new PrintStream(os);
+		visitor = new LogGeometryVisitor(out);
+		p.accept(visitor);
+		results = os.toString("UTF8");
+		Assert.assertEquals("Je suis un point vide.", results);
+		os = new ByteArrayOutputStream();
+		out = new PrintStream(os);
+		visitor = new LogGeometryVisitor(out);
+		ls3.accept(visitor);
+		results = os.toString("UTF8");
+		results = os.toString("UTF8");
+		Assert.assertEquals("Je suis une polyligne vide.", results);
+		geometry = SampleGeometryFactory.createLineStringOA();
+		os = new ByteArrayOutputStream();
+		out = new PrintStream(os);
+		visitor = new LogGeometryVisitor(out);
+		geometry.accept(visitor);
+		results = os.toString("UTF8");
+		results = os.toString("UTF8");
+		Assert.assertEquals("Je suis une polyligne définie par 2 point(s).", results);
 	}
 }
