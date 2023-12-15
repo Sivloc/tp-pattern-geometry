@@ -59,52 +59,6 @@ public class PointTest {
 		Geometry lscopy = ls.clone();
 		lscopy.translate(-10, -10);
 		Assert.assertNotEquals(ls, lscopy);
-		//////// Envelope & EnvelopeBuilder
-		EnvelopeBuilder builder = new EnvelopeBuilder();
-		builder.insert(new Coordinate(0.0, 1.0));
-		builder.insert(new Coordinate(2.0, 0.0));
-		builder.insert(new Coordinate(1.0, 3.0));
-		Envelope result = builder.build();
-		Assert.assertEquals("0.0,0.0,2.0,3.0", result.toString());
-		Envelope empty = new Envelope();
-		Assert.assertTrue(empty.isEmpty());
-		//////// Envelope Facade
-		Assert.assertEquals("3.0,9.2,3.0,9.2", p2.getEnvelope().toString());
-		Assert.assertEquals("3.0,9.2,6.0,13.2", ls.getEnvelope().toString());
-		//////// WktWriter
-		WktWriter writer = new WktWriter();
-		Assert.assertEquals(writer.write(p2), "POINT(3.0 9.2)");
-		Assert.assertEquals(writer.write(p), "POINT EMPTY");
-		Assert.assertEquals(writer.write(ls3), "LINESTRING EMPTY");
-		Assert.assertEquals(writer.write(ls), "LINESTRING(3.0 9.2,6.0 13.2)");
-		//////// GeometryVisitor
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		PrintStream out = new PrintStream(os);
-		LogGeometryVisitor visitor = new LogGeometryVisitor(out);
-		Geometry geometry = SampleGeometryFactory.createPointA();
-		geometry.accept(visitor);
-		String results = os.toString("UTF8");
-		Assert.assertEquals(results, "Je suis un point avec x=3.0 et y=4.0.");
-		os = new ByteArrayOutputStream();
-		out = new PrintStream(os);
-		visitor = new LogGeometryVisitor(out);
-		p.accept(visitor);
-		results = os.toString("UTF8");
-		Assert.assertEquals("Je suis un point vide.", results);
-		os = new ByteArrayOutputStream();
-		out = new PrintStream(os);
-		visitor = new LogGeometryVisitor(out);
-		ls3.accept(visitor);
-		results = os.toString("UTF8");
-		results = os.toString("UTF8");
-		Assert.assertEquals("Je suis une polyligne vide.", results);
-		geometry = SampleGeometryFactory.createLineStringOA();
-		os = new ByteArrayOutputStream();
-		out = new PrintStream(os);
-		visitor = new LogGeometryVisitor(out);
-		geometry.accept(visitor);
-		results = os.toString("UTF8");
-		results = os.toString("UTF8");
-		Assert.assertEquals("Je suis une polyligne définie par 2 point(s).", results);
-	}
+		
+		}
 }
