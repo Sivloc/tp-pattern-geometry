@@ -7,6 +7,9 @@ public class WktVisitor implements GeometryVisitor {
 	public WktVisitor() {
 		this.buffer = new StringBuilder();
 	}
+	public void visit(AbstractGeometry geom) {
+		buffer.append("Abstract Geometry");
+	}
 
 	@Override
 	public void visit(Point point) {

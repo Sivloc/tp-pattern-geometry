@@ -17,6 +17,7 @@ public class PointTest {
 	@Test
 	///////// Point
 	public void testConstructorPoint() throws UnsupportedEncodingException {
+		SampleGeometryFactory percent = new SampleGeometryFactory();
 		Point p = new Point();
 		Assert.assertEquals("[NaN,NaN]", p.getCoordinate().toString());
 		Coordinate c = new Coordinate(3.0, 4.0);

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SampleGeometryFactory {
+	public SampleGeometryFactory() {
+		
+	}
 	public static Point createPointO() {
 		return new Point(new Coordinate(0.0,0.0));
 	}
