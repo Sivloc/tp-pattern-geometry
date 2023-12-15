@@ -64,5 +64,8 @@ public class PointTest {
 		Assert.assertEquals("0.0,0.0,2.0,3.0", result.toString());
 		Envelope empty = new Envelope();
 		Assert.assertTrue(empty.isEmpty());
+		//////// Envelope Facade
+		Assert.assertEquals("3.0,9.2,3.0,9.2", p2.getEnvelope().toString());
+		Assert.assertEquals("3.0,9.2,6.0,13.2", ls.getEnvelope().toString());
 	}
 }
