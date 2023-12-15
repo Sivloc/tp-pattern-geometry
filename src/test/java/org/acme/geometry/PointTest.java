@@ -55,5 +55,14 @@ public class PointTest {
 		Geometry lscopy = ls.clone();
 		lscopy.translate(-10, -10);
 		Assert.assertNotEquals(ls, lscopy);
+		//////// Envelope & EnvelopeBuilder
+		EnvelopeBuilder builder = new EnvelopeBuilder();
+		builder.insert(new Coordinate(0.0, 1.0));
+		builder.insert(new Coordinate(2.0, 0.0));
+		builder.insert(new Coordinate(1.0, 3.0));
+		Envelope result = builder.build();
+		Assert.assertEquals("0.0,0.0,2.0,3.0", result.toString());
+		Envelope empty = new Envelope();
+		Assert.assertTrue(empty.isEmpty());
 	}
 }
