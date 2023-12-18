@@ -45,7 +45,7 @@ public class LineString extends AbstractGeometry {
 			p.translate(dx, dy);
 		}
 	}
-
+	@Override
 	public Geometry clone() {
 		List<Point> list = new ArrayList<Point>();
 		for (Point p : points) {
@@ -61,8 +61,14 @@ public class LineString extends AbstractGeometry {
 		}
 		return builder.build();
 	}
-	
+	@Override
 	public void accept(GeometryVisitor visitor) {
 		visitor.visit(this);
+	}
+	@Override
+	public String asText() {
+		WktVisitor wvisitor = new WktVisitor();
+		wvisitor.visit(this);
+		return wvisitor.getResult();
 	}
 }
