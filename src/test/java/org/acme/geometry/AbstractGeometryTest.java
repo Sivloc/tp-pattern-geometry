@@ -14,7 +14,7 @@ public class AbstractGeometryTest {
 		Point emptyp = new Point();
 		LineString emptyls = new LineString();
 		Assert.assertEquals(emptyp.asText(), "POINT EMPTY");
-		Assert.assertEquals(emptyls, "LINESTRING EMPTY");
+		Assert.assertEquals(emptyls.asText(), "LINESTRING EMPTY");
 		
 	}
 

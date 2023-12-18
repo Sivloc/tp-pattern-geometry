@@ -31,7 +31,7 @@ public class Point extends AbstractGeometry {
 	public void translate(double dx, double dy) {
 		this.coordinate = new Coordinate(this.coordinate.getX() + dx, this.coordinate.getY() + dy);
 	}
-
+	@Override
 	public Geometry clone() {
 		return new Point(this.getCoordinate());
 	}
@@ -41,8 +41,14 @@ public class Point extends AbstractGeometry {
 		builder.insert(getCoordinate());
 		return builder.build();
 	}
-
+	@Override
 	public void accept(GeometryVisitor visitor) {
 		visitor.visit(this);
+	}
+	@Override
+	public String asText() {
+		WktVisitor wvisitor = new WktVisitor();
+		wvisitor.visit(this);
+		return wvisitor.getResult();
 	}
 }
