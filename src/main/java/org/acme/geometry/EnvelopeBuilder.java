@@ -29,13 +29,17 @@ public class EnvelopeBuilder implements GeometryVisitor{
 
 	@Override
 	public void visit(Point point) {
-		// TODO Auto-generated method stub
-		
+		insert(point.getCoordinate());
 	}
 
 	@Override
 	public void visit(LineString LineString) {
-		// TODO Auto-generated method stub
+		for (int i=0;i<LineString.getNumPoints();i++) {
+			insert(LineString.getPointN(i).getCoordinate());
+		}
+	}
+
+	public void visit(AbstractGeometry abstractGeometry) {
 		
 	}
 }
